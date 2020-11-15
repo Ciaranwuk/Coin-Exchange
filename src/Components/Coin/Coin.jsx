@@ -8,10 +8,6 @@ const Td = styled.td`
 `;
 
 export default class Coin extends Component {
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
     /*
     componentDidMount() {
         const callback = () => {
@@ -28,7 +24,7 @@ export default class Coin extends Component {
     }
     */
 
-   handleClick(event) {
+   handleClick = (event) => {
         //prevent default acton of submitting the form
         event.preventDefault();
 
@@ -45,11 +41,13 @@ export default class Coin extends Component {
    
 
     render() {
+        let balanceToggle = this.props.showBalance ? <Td> {this.props.balance} </Td> : null;
         return (
             <tr>
                 <Td>{this.props.name}</Td>
                 <Td>{this.props.ticker}</Td>
                 <Td>${this.props.price}</Td>
+                {balanceToggle}
                 <Td>
                     <form action="#" method="POST">
                         <button onClick={this.handleClick}>Refresh</button>
