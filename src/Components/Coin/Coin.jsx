@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from 'styled-components';
 
@@ -7,55 +7,28 @@ const Td = styled.td`
     width: 25vh;
 `;
 
-export default class Coin extends Component {
-    /*
-    componentDidMount() {
-        const callback = () => {
-            //set the state to a new random value
-            const randomPercentage = 0.995 + Math.random() * 0.01;
+export default function Coin(props) {
 
-            this.setState( function(oldState){
-                return {
-                    price: oldState.price * randomPercentage
-                };
-            });
-        }
-        setInterval( callback, 1000 );
-    }
-    */
-
-   handleClick = (event) => {
+   const handleClick = (event) => {
         //prevent default acton of submitting the form
         event.preventDefault();
-
-        this.props.handleRefresh(this.props.ticker);
-    /*
-        const randomPercentage = 0.995 + Math.random() * 0.01;
-        this.setState( function(oldState) {
-            return {
-                price: oldState.price * randomPercentage
-            };
-        });
-    */
+        props.handleRefresh(props.id);
    }
    
-
-    render() {
-        let balanceToggle = this.props.showBalance ? <Td> {this.props.balance} </Td> : null;
+        let balanceToggle = props.showBalance ? <Td> {props.balance} </Td> : null;
         return (
             <tr>
-                <Td>{this.props.name}</Td>
-                <Td>{this.props.ticker}</Td>
-                <Td>${this.props.price}</Td>
+                <Td>{props.name}</Td>
+                <Td>{props.ticker}</Td>
+                <Td>${props.price}</Td>
                 {balanceToggle}
                 <Td>
                     <form action="#" method="POST">
-                        <button onClick={this.handleClick}>Refresh</button>
+                        <button onClick={handleClick}>Refresh</button>
                     </form>
                 </Td>
             </tr>
         )
-    }
 }
 
 Coin.propTypes = {

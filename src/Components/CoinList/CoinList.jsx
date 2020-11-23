@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Coin from '../Coin/Coin';
 import styled from 'styled-components';
 
@@ -8,9 +8,9 @@ display: inline-block;
 font-size:1.4rem;
 `;
 
-export default class CoinList extends Component {
-    render() {
-        let balanceToggle = this.props.showBalance ? <th> Balance </th> : null;
+export default function CoinList(props) {
+
+        let balanceToggle = props.showBalance ? <th> Balance </th> : null;
         return (
             <Table>
             <thead>
@@ -24,10 +24,12 @@ export default class CoinList extends Component {
             </thead>
             <tbody>
             {
-                this.props.coinData.map ( ({name, ticker, price, balance}) => 
-                    <Coin key= {ticker} 
-                        handleRefresh={this.props.handleRefresh}    
-                        showBalance = {this.props.showBalance}
+                props.coinData.map ( ({key, name, ticker, price, balance}) => 
+                    <Coin 
+                        key= {key} 
+                        id = {key}
+                        handleRefresh={props.handleRefresh}    
+                        showBalance = {props.showBalance}
                         name={name} 
                         ticker={ticker}
                         balance= {balance}   
@@ -37,7 +39,6 @@ export default class CoinList extends Component {
             </tbody>
             </Table>
         )
-    }
 }
 
 
